@@ -29,7 +29,7 @@ with st.form("myform"):
     c2.text_input("Référence de l'avis:", key="n2", label_visibility="collapsed")
     error_n1 = st.empty()
     error_n1.write("&nbsp;", unsafe_allow_html=True)
-    c1, c2 = st.columns([5, 1])
+    c1, c2 = st.columns([4, 1])
     with c1:
         submit = st.form_submit_button(label="Valider", help="Vérifier les informations d'avis")
     with c2:
