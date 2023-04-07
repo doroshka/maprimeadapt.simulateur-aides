@@ -50,7 +50,8 @@ if submit:
                 c1.metric("ANAH", value=res['ANAH'])
                 c2.metric("CNAV", value=res['CNAV'])
                 if res['var']['ANAH'] >= 50 and res['var']['CNAV'] >=37:
-                    st.success("Félicitations! Vous êtes éligible à une prise en charge intégrale de votre aménagement de salle de bains.", icon="✅")
+                    st.markdown('<h3 style="color:#456BA5">Félicitations! Vous êtes éligible à une prise en charge intégrale de votre aménagement de salle de bains. 😄</h3>', unsafe_allow_html=True)
+                    st.balloons()
         else:
             error_n1.markdown(f":red[{res['error']}]")
 
