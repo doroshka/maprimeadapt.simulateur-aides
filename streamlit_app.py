@@ -6,6 +6,7 @@ def clear_form():
     st.session_state["pr"] = "Île-de-France"
     st.session_state["n1"] = ""
     st.session_state["n2"] = ""
+    st.session_state["n3"] = ""
 
 image = Image.open('./images/logo.png')
 st.image(image, use_column_width='auto')
@@ -18,15 +19,18 @@ button[title="View fullscreen"]{
 st.markdown(hide_img_fs, unsafe_allow_html=True)
 
 with st.form("myform"):
-    c1, c2 = st.columns([1, 2])
+    c1, c2 = st.columns([2, 3])
     c1.text("Region:")
     c2.radio("Region", options=['Île-de-France', 'Province'], key="pr", horizontal=True, label_visibility="collapsed")
-    c1, c2 = st.columns([1, 2])
-    c1.text("Numéro fiscal:")
-    c2.text_input("Numéro fiscal:", key="n1", label_visibility="collapsed")
-    c1, c2 = st.columns([1, 2])
-    c1.text("Référence de l'avis:")
-    c2.text_input("Référence de l'avis:", key="n2", label_visibility="collapsed")
+    c1, c2 = st.columns([2, 3])
+    c1.text("Nombre de parts:")
+    c2.number_input("Nombre de parts:", key="n1", label_visibility="collapsed", format="%d", min_value=1, max_value=5, step=1)
+    c1, c2 = st.columns([2, 3])
+    c1.text("Revenu fiscal de référence:")
+    c2.number_input("Revenu fiscal de référence:", key="n2", label_visibility="collapsed", format="%d", min_value=0, step=1)
+    c1, c2 = st.columns([2, 3])
+    c1.text("Revenu Brut global:")
+    c2.number_input("Revenu Brut global:", key="n3", label_visibility="collapsed", format="%d", min_value=0, step=1)
     error_n1 = st.empty()
     error_n1.write("&nbsp;", unsafe_allow_html=True)
     c1, c2 = st.columns([4, 1])
@@ -43,7 +47,7 @@ if submit:
         st.session_state.ok = 0
     if st.session_state.ok:
         with st.spinner('Wait for it...'):
-            res = b.checkEligibility(st.session_state.pr, st.session_state.n1, st.session_state.n2)
+            res = b.checkEligibility(st.session_state.pr, st.session_state.n1, st.session_state.n2, st.session_state.n3)
         if res['is_ok'] == 1:
             with st.expander("Results", expanded=True):
                 c1, c2 = st.columns(2)
