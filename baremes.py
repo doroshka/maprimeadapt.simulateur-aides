@@ -100,77 +100,18 @@ json_str = '''
 
 baremes = json.loads(json_str)
 
-def checkEligibility(p, n1, n2):
+def checkEligibility(p, n1, n2, n3):
     r = dict()
     r['is_ok'] = 1
     r['ANAH'] = "Non Eligible"
     r['CNAV'] = "Non Eligible"
     r['province'] = p
-    r['num'] = sub(r'\s+', '', n1)
-    r['ref'] = sub(r'\s+', '', n2)
 
-    resp = requests.get('https://cfsmsp.impots.gouv.fr/secavis/')
-    r['status_code'] = resp.status_code
-    if resp.status_code != requests.codes.ok:
-       r['is_ok'] = 0
-       r['error'] = f"cfsmsp.impots.gouv.fr not accessible. Status code: [{resp.status_code}]"
-       return r
-
-    soup = BeautifulSoup(resp.text, 'html.parser')
-    inp = soup.find(id="j_id__v_0:javax.faces.ViewState:1")
-    sessionId = inp['value']
-
-    resp = requests.post('https://cfsmsp.impots.gouv.fr/secavis/faces/commun/index.jsf', 
-       data={
-           'j_id_7:spi': r['num'], 
-           'j_id_7:num_facture': r['ref'], 
-           'j_id_7:j_id_l': 'Valider', 
-           'j_id_7_SUBMIT': 1,
-           'javax.faces.ViewState': sessionId,
-       })
-    r['status_code'] = resp.status_code
-    if resp.status_code != requests.codes.ok:
-       r['is_ok'] = 0
-       r['error'] = f"Form post error. Status code: [{resp.status_code}]"
-       return r
-
-    r['values'] = {}
     r['var'] = {}
-    soup = BeautifulSoup(resp.text, 'html.parser')
-    # soup = BeautifulSoup(text, 'html.parser')
-    err_msg = soup.find(id="nonTrouve")
-    if err_msg:
-        r['is_ok'] = 0
-        r['status_code'] = resp.status_code
-        r['error'] = err_msg.text
-        return r
+    r['var']['nom_de_part_int'] = n1
+    r['var']['revenue_fiscal'] = n2
+    r['var']['revenue_global'] = n3/12
 
-    k_prev = ''
-    for tr in soup.find_all("tr"):
-        tds = tr.find_all("td")
-        k = tds[0].text.strip()
-        if len(tds) > 1:
-            v = tds[1].text.strip()
-            if k == '' and k_prev != '':
-                r['values'][k_prev] = r['values'][k_prev] + ' ' + v
-            elif k != '':
-                r['values'][k] = v
-        k_prev = k
-        if k == "Nombre de part(s)":
-            r['var']['nom_de_part'] = v
-        elif k == "Nombre de personne(s) à charge":
-            r['var']['nom_de_charge'] = v
-        elif k == "Revenu brut global":
-            r['var']['revenue_global_str'] = v
-            r['var']['revenue_global'] = int(sub(r'[^\d.]', '', r['var']['revenue_global_str']))/12
-        elif k == "Revenu fiscal de référence":
-            r['var']['revenue_fiscal_str'] = v
-            r['var']['revenue_fiscal'] = int(sub(r'[^\d.]', '', r['var']['revenue_fiscal_str']))
-
-    if float(r['var']['nom_de_charge']) == 0:
-        r['var']['nom_de_part_int'] = math.floor(float(r['var']['nom_de_part']))
-    else:
-        r['var']['nom_de_part_int'] = math.ceil(float(r['var']['nom_de_part']))
     r['var']['nom_de_part_ANAH'] = str(r['var']['nom_de_part_int'])
     r['var']['nom_de_part_CNAV'] = str(r['var']['nom_de_part_int'])
     if r['var']['nom_de_part_int'] > 5:
