@@ -4,9 +4,9 @@ from PIL import Image
 
 def clear_form():
     st.session_state["pr"] = "Île-de-France"
-    st.session_state["n1"] = ""
-    st.session_state["n2"] = ""
-    st.session_state["n3"] = ""
+    st.session_state["n1"] = 1
+    st.session_state["n2"] = 0
+    st.session_state["n3"] = 0
 
 image = Image.open('./images/logo.png')
 st.image(image, use_column_width='auto')
