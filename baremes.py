@@ -119,6 +119,8 @@ def checkEligibility(p, n1, n2, n3):
     if r['var']['nom_de_part_int'] > 2:
         r['var']['nom_de_part_CNAV'] = "2"
 
+    r['var']['ANAH'] = 0
+    r['var']['CNAV'] = 0
 
     for val in baremes['ANAH'][p][r['var']['nom_de_part_ANAH']]:
        if r['var']['revenue_fiscal'] >= val['min'] and r['var']['revenue_fiscal'] < val['max']:
