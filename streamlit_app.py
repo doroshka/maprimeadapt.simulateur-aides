@@ -51,9 +51,9 @@ if submit:
         if res['is_ok'] == 1:
             with st.expander("Results", expanded=True):
                 c1, c2 = st.columns(2)
-                c1.metric("ANAH", value=res['ANAH'])
+                c1.metric("Ma Prime Adapt", value=res['MPA'])
                 c2.metric("CNAV", value=res['CNAV'])
-                if res['var']['ANAH'] >= 50 and res['var']['CNAV'] >=37:
+                if res['var']['MPA'] >= 50 and res['var']['CNAV'] >=37:
                     st.markdown('<h3 style="color:#456BA5">Félicitations! Vous êtes éligible à une prise en charge intégrale de votre aménagement de salle de bains. 😄</h3>', unsafe_allow_html=True)
                     st.balloons()
         else:
