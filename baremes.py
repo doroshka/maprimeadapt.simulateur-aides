@@ -7,6 +7,52 @@ from bs4 import BeautifulSoup
 
 json_str = '''
 {
+	"MPA":{
+		"Île-de-France": {
+			"1":[
+				{"min" : 0,     "max": 22461, "value": 70},
+				{"min" : 22461, "max": 27343, "value": 50}
+			],
+			"2":[
+				{"min" : 0,     "max": 32967, "value": 70},
+				{"min" : 32967, "max": 40130, "value": 50}
+			],
+			"3":[
+				{"min" : 0,     "max": 39591, "value": 70},
+				{"min" : 39591, "max": 48197, "value": 50}
+			],
+			"4":[
+				{"min" : 0,     "max": 46226, "value": 70},
+				{"min" : 46226, "max": 56277, "value": 50}
+			],
+			"5":[
+				{"min" : 0,     "max": 52886, "value": 70},
+				{"min" : 52886, "max": 64380, "value": 50}
+			]
+		},
+		"Province": {
+			"1":[
+				{"min" : 0,     "max": 16229, "value": 70},
+				{"min" : 16229, "max": 20805, "value": 50}
+			],
+			"2":[
+				{"min" : 0,     "max": 23734, "value": 70},
+				{"min" : 23734, "max": 30427, "value": 50}
+			],
+			"3":[
+				{"min" : 0,     "max": 28545, "value": 70},
+				{"min" : 28545, "max": 36591, "value": 50}
+			],
+			"4":[
+				{"min" : 0,     "max": 33346, "value": 70},
+				{"min" : 33346, "max": 42748, "value": 50}
+			],
+			"5":[
+				{"min" : 0,     "max": 38168, "value": 70},
+				{"min" : 38168, "max": 48930, "value": 50}
+			]
+		}
+	},
 	"ANAH":{
 		"Île-de-France": {
 			"1":[
@@ -103,7 +149,8 @@ baremes = json.loads(json_str)
 def checkEligibility(p, n1, n2, n3):
     r = dict()
     r['is_ok'] = 1
-    r['ANAH'] = "Non Eligible"
+    r['MPA'] = "Non Eligible"
+    #r['ANAH'] = "Non Eligible"
     r['CNAV'] = "Non Eligible"
     r['province'] = p
 
@@ -112,20 +159,29 @@ def checkEligibility(p, n1, n2, n3):
     r['var']['revenue_fiscal'] = n2
     r['var']['revenue_global'] = n3/12
 
-    r['var']['nom_de_part_ANAH'] = str(r['var']['nom_de_part_int'])
+    r['var']['nom_de_part_MPA'] = str(r['var']['nom_de_part_int'])
+    #r['var']['nom_de_part_ANAH'] = str(r['var']['nom_de_part_int'])
     r['var']['nom_de_part_CNAV'] = str(r['var']['nom_de_part_int'])
     if r['var']['nom_de_part_int'] > 5:
-        r['var']['nom_de_part_ANAH'] = "5"
+        r['var']['nom_de_part_MPA'] = "5"
+        #r['var']['nom_de_part_ANAH'] = "5"
     if r['var']['nom_de_part_int'] > 2:
         r['var']['nom_de_part_CNAV'] = "2"
 
-    r['var']['ANAH'] = 0
+    r['var']['MPA'] = 0
+    #r['var']['ANAH'] = 0
     r['var']['CNAV'] = 0
 
-    for val in baremes['ANAH'][p][r['var']['nom_de_part_ANAH']]:
+    #for val in baremes['ANAH'][p][r['var']['nom_de_part_ANAH']]:
+    #   if r['var']['revenue_fiscal'] >= val['min'] and r['var']['revenue_fiscal'] < val['max']:
+    #       r['var']['ANAH'] = val['value']
+    #       r['ANAH'] = str(r['var']['ANAH'])+"%"
+    #       break
+
+    for val in baremes['MPA'][p][r['var']['nom_de_part_MPA']]:
        if r['var']['revenue_fiscal'] >= val['min'] and r['var']['revenue_fiscal'] < val['max']:
-           r['var']['ANAH'] = val['value']
-           r['ANAH'] = str(r['var']['ANAH'])+"%"
+           r['var']['MPA'] = val['value']
+           r['MPA'] = str(r['var']['MPA'])+"%"
            break
 
     for val in baremes['CNAV'][p][r['var']['nom_de_part_CNAV']]:
