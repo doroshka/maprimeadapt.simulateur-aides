@@ -12,8 +12,8 @@ image = Image.open('./images/logo.png')
 st.image(image, use_column_width='auto')
 hide_img_fs = '''
 <style>
-button[title="View fullscreen"]{
-    visibility: hidden;}
+button[title="View fullscreen"]{visibility: hidden;}
+.block-container {padding-top: 3rem;}
 </style>
 '''
 st.markdown(hide_img_fs, unsafe_allow_html=True)
@@ -28,9 +28,6 @@ with st.form("myform"):
     c1, c2 = st.columns([2, 3])
     c1.text("Revenu fiscal de référence:")
     c2.number_input("Revenu fiscal de référence:", key="n2", label_visibility="collapsed", format="%d", min_value=0, step=1)
-    c1, c2 = st.columns([2, 3])
-    c1.text("Revenu Brut global:")
-    c2.number_input("Revenu Brut global:", key="n3", label_visibility="collapsed", format="%d", min_value=0, step=1)
     error_n1 = st.empty()
     error_n1.write("&nbsp;", unsafe_allow_html=True)
     c1, c2 = st.columns([4, 1])
@@ -47,13 +44,11 @@ if submit:
         st.session_state.ok = 0
     if st.session_state.ok:
         with st.spinner('Wait for it...'):
-            res = b.checkEligibility(st.session_state.pr, st.session_state.n1, st.session_state.n2, st.session_state.n3)
+            res = b.checkEligibility(st.session_state.pr, st.session_state.n1, st.session_state.n2, 0)
         if res['is_ok'] == 1:
             with st.expander("Results", expanded=True):
-                c1, c2 = st.columns(2)
-                c1.metric("Ma Prime Adapt", value=res['MPA'])
-                c2.metric("CNAV", value=res['CNAV'])
-                if res['var']['MPA'] >= 50 and res['var']['CNAV'] >=37:
+                st.metric("", value=res['MPA'])
+                if res['var']['MPA'] >= 50:
                     st.markdown('<h3 style="color:#456BA5">Félicitations! Vous êtes éligible à une prise en charge intégrale de votre aménagement de salle de bains. 😄</h3>', unsafe_allow_html=True)
                     st.balloons()
         else:
