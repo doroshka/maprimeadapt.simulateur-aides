@@ -151,17 +151,17 @@ def checkEligibility(p, n1, n2, n3):
     r['is_ok'] = 1
     r['MPA'] = "Non Eligible"
     #r['ANAH'] = "Non Eligible"
-    r['CNAV'] = "Non Eligible"
+    #r['CNAV'] = "Non Eligible"
     r['province'] = p
 
     r['var'] = {}
     r['var']['nom_de_part_int'] = n1
     r['var']['revenue_fiscal'] = n2
-    r['var']['revenue_global'] = n3/12
+    #r['var']['revenue_global'] = n3/12
 
     r['var']['nom_de_part_MPA'] = str(r['var']['nom_de_part_int'])
     #r['var']['nom_de_part_ANAH'] = str(r['var']['nom_de_part_int'])
-    r['var']['nom_de_part_CNAV'] = str(r['var']['nom_de_part_int'])
+    #r['var']['nom_de_part_CNAV'] = str(r['var']['nom_de_part_int'])
     if r['var']['nom_de_part_int'] > 5:
         r['var']['nom_de_part_MPA'] = "5"
         #r['var']['nom_de_part_ANAH'] = "5"
@@ -170,7 +170,7 @@ def checkEligibility(p, n1, n2, n3):
 
     r['var']['MPA'] = 0
     #r['var']['ANAH'] = 0
-    r['var']['CNAV'] = 0
+    #r['var']['CNAV'] = 0
 
     #for val in baremes['ANAH'][p][r['var']['nom_de_part_ANAH']]:
     #   if r['var']['revenue_fiscal'] >= val['min'] and r['var']['revenue_fiscal'] < val['max']:
@@ -184,10 +184,10 @@ def checkEligibility(p, n1, n2, n3):
            r['MPA'] = str(r['var']['MPA'])+"%"
            break
 
-    for val in baremes['CNAV'][p][r['var']['nom_de_part_CNAV']]:
-       if r['var']['revenue_global'] >= val['min'] and r['var']['revenue_global'] < val['max']:
-           r['var']['CNAV'] = val['value']
-           r['CNAV'] = str(r['var']['CNAV'])+"%"
-           break
+    #for val in baremes['CNAV'][p][r['var']['nom_de_part_CNAV']]:
+    #   if r['var']['revenue_global'] >= val['min'] and r['var']['revenue_global'] < val['max']:
+    #       r['var']['CNAV'] = val['value']
+    #       r['CNAV'] = str(r['var']['CNAV'])+"%"
+    #       break
 
     return r
