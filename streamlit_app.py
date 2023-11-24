@@ -48,7 +48,7 @@ if submit:
         if res['is_ok'] == 1:
             with st.expander("Results", expanded=True):
                 st.metric("", value=res['MPA'])
-                if res['var']['MPA'] >= 50:
+                if res['var']['MPA'] >= 70:
                     st.markdown('<h3 style="color:#456BA5">Félicitations! Vous êtes éligible à une prise en charge intégrale de votre aménagement de salle de bains. 😄</h3>', unsafe_allow_html=True)
                     st.balloons()
         else:
