@@ -10,46 +10,46 @@ json_str = '''
 	"MPA":{
 		"Île-de-France": {
 			"1":[
-				{"min" : 0,     "max": 22461, "value": 70},
-				{"min" : 22461, "max": 27343, "value": 50}
+				{"min" : 0,     "max": 23541, "value": 70},
+				{"min" : 23541, "max": 28657, "value": 50}
 			],
 			"2":[
-				{"min" : 0,     "max": 32967, "value": 70},
-				{"min" : 32967, "max": 40130, "value": 50}
+				{"min" : 0,     "max": 34551, "value": 70},
+				{"min" : 34551, "max": 42058, "value": 50}
 			],
 			"3":[
-				{"min" : 0,     "max": 39591, "value": 70},
-				{"min" : 39591, "max": 48197, "value": 50}
+				{"min" : 0,     "max": 41493, "value": 70},
+				{"min" : 41493, "max": 50513, "value": 50}
 			],
 			"4":[
-				{"min" : 0,     "max": 46226, "value": 70},
-				{"min" : 46226, "max": 56277, "value": 50}
+				{"min" : 0,     "max": 48447, "value": 70},
+				{"min" : 48447, "max": 58981, "value": 50}
 			],
 			"5":[
-				{"min" : 0,     "max": 52886, "value": 70},
-				{"min" : 52886, "max": 64380, "value": 50}
+				{"min" : 0,     "max": 55427, "value": 70},
+				{"min" : 55427, "max": 67473, "value": 50}
 			]
 		},
 		"Province": {
 			"1":[
-				{"min" : 0,     "max": 16229, "value": 70},
-				{"min" : 16229, "max": 20805, "value": 50}
+				{"min" : 0,     "max": 17009, "value": 70},
+				{"min" : 17009, "max": 21805, "value": 50}
 			],
 			"2":[
-				{"min" : 0,     "max": 23734, "value": 70},
-				{"min" : 23734, "max": 30427, "value": 50}
+				{"min" : 0,     "max": 24875, "value": 70},
+				{"min" : 24875, "max": 31889, "value": 50}
 			],
 			"3":[
-				{"min" : 0,     "max": 28545, "value": 70},
-				{"min" : 28545, "max": 36591, "value": 50}
+				{"min" : 0,     "max": 29917, "value": 70},
+				{"min" : 29917, "max": 38349, "value": 50}
 			],
 			"4":[
-				{"min" : 0,     "max": 33346, "value": 70},
-				{"min" : 33346, "max": 42748, "value": 50}
+				{"min" : 0,     "max": 34948, "value": 70},
+				{"min" : 34948, "max": 44802, "value": 50}
 			],
 			"5":[
-				{"min" : 0,     "max": 38168, "value": 70},
-				{"min" : 38168, "max": 48930, "value": 50}
+				{"min" : 0,     "max": 40002, "value": 70},
+				{"min" : 40002, "max": 51281, "value": 50}
 			]
 		}
 	},
