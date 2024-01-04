@@ -23,7 +23,7 @@ with st.form("myform"):
     c1.text("Region:")
     c2.radio("Region", options=['Île-de-France', 'Province'], key="pr", horizontal=True, label_visibility="collapsed")
     c1, c2 = st.columns([2, 3])
-    c1.text("Nombre de parts:")
+    c1.text("Nbre de personnes dans le foyer:")
     c2.number_input("Nbre de personnes dans le foyer:", key="n1", label_visibility="collapsed", format="%d", min_value=1, max_value=5, step=1)
     c1, c2 = st.columns([2, 3])
     c1.text("Revenu fiscal de référence:")
