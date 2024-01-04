@@ -30,7 +30,7 @@ with st.form("myform"):
     c2.number_input("Revenu fiscal de référence:", key="n2", label_visibility="collapsed", format="%d", min_value=0, step=1)
     error_n1 = st.empty()
     error_n1.write("&nbsp;", unsafe_allow_html=True)
-    c1, c2 = st.columns([5, 2])
+    c1, c2 = st.columns([4, 1])
     with c1:
         submit = st.form_submit_button(label="Valider", help="Vérifier les informations d'avis")
     with c2:
